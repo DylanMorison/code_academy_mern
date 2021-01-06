@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const exercisesRouter = require("./routes/exercises");
+const usersRouter = require("./routes/users");
 
 require("dotenv").config();
 
@@ -20,6 +22,9 @@ const connection = mongoose.connection;
 connection.once("open", () => {
 	console.log("Mongoose database connection established succsessfully");
 });
+
+app.use("/exercises", exercisesRouter);
+app.use("/users", usersRouter);
 
 app.listen(port, () => {
 	console.log(`Server running on port ${port}`);
